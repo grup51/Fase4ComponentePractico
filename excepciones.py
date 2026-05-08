@@ -1,3 +1,4 @@
+# Manejo de excepciones personalizadas
 class ErrorAplicacion(Exception):
     pass
 

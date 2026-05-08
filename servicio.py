@@ -1,3 +1,4 @@
+# Clase abstracta Servicio + herencia
 from abc import ABC, abstractmethod
 from excepciones import ErrorServicio
 

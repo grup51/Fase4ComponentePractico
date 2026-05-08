@@ -1,9 +1,11 @@
+# Menu interactivo para gestionar clientes, servicios y reservas
 from cliente import Cliente
 from servicio import ReservaSala
 from reserva import Reserva
 from simulacion import ejecutar_simulacion
 from logger import registrar_log
 
+# Listas para almacenar información de clientes, servicios y reservas
 clientes = []
 servicios = []
 reservas = []

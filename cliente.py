@@ -1,3 +1,4 @@
+# Clase Cliente (encapsulación + validaciones)
 from excepciones import ErrorCliente
 
 class Cliente:

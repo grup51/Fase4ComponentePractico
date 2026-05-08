@@ -1,3 +1,4 @@
+# pruebas obligatorias Simulación (mínimo 10 operaciones)
 from cliente import Cliente
 from servicio import ReservaSala, AlquilerEquipo, Asesoria
 from reserva import Reserva

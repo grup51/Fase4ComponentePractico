@@ -1,3 +1,4 @@
+# Clase Reserva para gestionar las reservas de servicios
 from excepciones import ErrorReserva
 
 class Reserva:
