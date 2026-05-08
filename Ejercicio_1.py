@@ -24,6 +24,7 @@ class EntidadGeneral(ABC): # aplicando clases abstractas entidadGeneral no se pu
     @abstractmethod
     def obtener_identificacion(self): # obligamos a que todos tengan un metodo para mostrar su ID
         pass
+    
 # --- APORTE DE BREITNER EDUARDO RODRIGUEZ FRANCO ---
 # Aqui definimos al cliente, que hereda las cosas de EntidadGeneral
 class Cliente(EntidadGeneral):
