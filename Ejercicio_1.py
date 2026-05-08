@@ -88,6 +88,31 @@ class AlquilerEquipos(Servicio):
     def calcular_costo(self, dias, tiene_seguro=True): #pedimos los dias y preguntamos si el cliente tiene seguro
         cargo_seguro = 15000 if tiene_seguro else 0 # si tiene seguro le sumamos 15000 si no le sumamos 0
         return (self.precio_base * dias) + cargo_seguro # devuelvo el cobro final sumando el precio por los dias mas el seguro
+
+class AsesoriaEspecializada(Servicio): # representa el cconocimiento experto que vendemos dividido en sesiones 
+    def describir_servicio(self): # presento el servicio como una consultoria experta
+        return f"Consultoria experta en ({self.tipo})" # le digo al cliente en que tema es experto el asesor que contrato
+    def calcular_costo(self, sesiones):# defino la forma de cobrar
+        #multiplicamos el precio base por las sesiones y le sumamos un 10% extra
+        return(self_precio_base * sesiones) * 1.10
+    
+# definimos la clase Reserva que funciona como el molde principal para generar cada registro de alquiler en nuestro sistema
+class Reserva:
+    # creamos el metodo que recibe los datos cuando hay una reserva
+    def __init__(self, cliente, servicio, duracion):
+        self.cliente = cliente
+        self.servicio = servicio
+        self.duracion = duracion
+        self.estado = "PENDIENTE"
+
+    
+
+        
+
+
+        
+
+
     
 
   
