@@ -87,7 +87,7 @@ class AlquilerEquipos(Servicio):
         return f"Equipo Tecnologico ({self.tipo})"
     def calcular_costo(self, dias, tiene_seguro=True): #pedimos los dias y preguntamos si el cliente tiene seguro
         cargo_seguro = 15000 if tiene_seguro else 0 # si tiene seguro le sumamos 15000 si no le sumamos 0
-        return (self.precio_base*dias) + cargo_seguro # devuelvo el cobro final sumando el precio por los dias mas el seguro
+        return (self.precio_base * dias) + cargo_seguro # devuelvo el cobro final sumando el precio por los dias mas el seguro
     
 
   
