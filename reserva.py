@@ -22,3 +22,6 @@ class Reserva:
 
     def cancelar(self):
         self.estado = "Cancelada"
+
+
+       

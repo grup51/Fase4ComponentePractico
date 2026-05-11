@@ -24,7 +24,6 @@ class EntidadGeneral(ABC): # aplicando clases abstractas entidadGeneral no se pu
     @abstractmethod
     def obtener_identificacion(self): # obligamos a que todos tengan un metodo para mostrar su ID
         pass
-    
 # --- APORTE DE BREITNER EDUARDO RODRIGUEZ FRANCO ---
 # Aqui definimos al cliente, que hereda las cosas de EntidadGeneral
 class Cliente(EntidadGeneral):
@@ -69,50 +68,6 @@ class Servicio(ABC):
     @abstractmethod
     def describir_servicio(self):
         pass
-    # aporte jhon jairo cardenas
-    # creamos el servicio para alquilar salas. como es hijo de servicio ya sabe que tiene un nombre y un precio base
-class ReservaSalas(Servicio):
-    def describir_servicio(self): # esta linea sirve para cuando el programa pregunte que es esto responda sala de juntas
-        return f"sala de juntas ({self.tipo})" #seguido del tipo de sala
-    # se define como cobrar
-    def calcular_costo(self, horas, descuento=0):
-     
-        if horas > 12: # pongo un limite si el cliente se pasa de 12 horas el programa se detiene
-            raise ErrorDeNegocio("parametro excedido maximo 12 horas por reserva")#lanzo el aviso de error explicando que no se puede reservar tantas horas
-        total = (self.precio_base*horas) - descuento #operacion matematica multiplico el precio por el tiempo y le resto el descuento
-        return max(total,0)# entrego el resultado final asegurandome de que si el descuento es mayor al precio el sistema no me de numeros negativos
-# Esta es la segunda clase tambien es hija de servicio aqui alquilamos objetos fisicos
-class AlquilerEquipos(Servicio):
-    def describir_servicio(self):#identifico el servicio como un equipo tecnologico y lo muestro en pantalla
-        return f"Equipo Tecnologico ({self.tipo})"
-    def calcular_costo(self, dias, tiene_seguro=True): #pedimos los dias y preguntamos si el cliente tiene seguro
-        cargo_seguro = 15000 if tiene_seguro else 0 # si tiene seguro le sumamos 15000 si no le sumamos 0
-        return (self.precio_base * dias) + cargo_seguro # devuelvo el cobro final sumando el precio por los dias mas el seguro
-
-class AsesoriaEspecializada(Servicio): # representa el cconocimiento experto que vendemos dividido en sesiones 
-    def describir_servicio(self): # presento el servicio como una consultoria experta
-        return f"Consultoria experta en ({self.tipo})" # le digo al cliente en que tema es experto el asesor que contrato
-    def calcular_costo(self, sesiones):# defino la forma de cobrar
-        #multiplicamos el precio base por las sesiones y le sumamos un 10% extra
-        return(self_precio_base * sesiones) * 1.10
-    
-# definimos la clase Reserva que funciona como el molde principal para generar cada registro de alquiler en nuestro sistema
-class Reserva:
-    # creamos el metodo que recibe los datos cuando hay una reserva
-    def __init__(self, cliente, servicio, duracion):
-        self.cliente = cliente
-        self.servicio = servicio
-        self.duracion = duracion
-        self.estado = "PENDIENTE"
-
-    
-
-        
-
-
-        
 
 
     
-
-  
