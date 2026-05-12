@@ -1,5 +1,0 @@
-# Sistema de logs
-2026-05-08 11:45:49.292425 - Nombre vacío
-2026-05-08 11:45:49.293097 - Precio inválido
-2026-05-08 11:45:49.293946 - Error al confirmar reserva
-2026-05-08 11:45:49.294635 - Correo inválido
