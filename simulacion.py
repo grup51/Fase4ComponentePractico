@@ -1,68 +1,57 @@
-# pruebas obligatorias Simulación (mínimo 10 operaciones)
-from cliente import Cliente
-from servicio import ReservaSala, AlquilerEquipo, Asesoria
-from reserva import Reserva
-from logger import registrar_log
+# simulacion de las 10 operaciones
+# aqui defino la funcion principal que sirve como el punto de entrada para ejecutar todo nuestro sistema de gestion
+def iniciar_software():
+    # imprimimos el encabezado para darle una bienvenida visual al usuario
+    print("   SOFTWARE FJ - SISTEMA DE GESTIÓN INTEGRAL         ")
+    
 
-def ejecutar_simulacion():
-    print("\n--- SIMULACIÓN ---")
+    # Creamos un diccionario de servicios
+    servicios_fj = {
+        "SALA": ReservaSalas("Sala Executive", 60000),
+        "PC": AlquilerEquipos("Workstation Dell", 20000),
+        "DEV": AsesoriaEspecializada("Arquitectura Software", 150000)
+    }
+# inicializamos una lista vacia para guardar a los clientes que pasen las reglas de registro
+    clientes_validados = []
+    
+    try: # implementamos una estructura de control de excepciones
+        # creamos un nuevo objeto de la clase Cliente y lo agregamos a nuestra lista
+        clientes_validados.append(Cliente("Carlos Ruiz", "CR8899")) 
+        clientes_validados.append(Cliente("Ana Maria", "AM7744"))
+        # si al crear los clientes ocurre un fallo de validacion atrapamos esa excepcion
+    except ErrorDeNegocio as e:
+        # generamos una notificacion de error en la configuracion utilizando el mensaje guardado en la variable {e}
+        print(f"Error en configuración inicial: {e}")
 
-    # 1 válido
-    try:
-        c1 = Cliente("Ana", "ana@mail.com")
-    except Exception as e:
-        registrar_log(e)
-
-    # 2 inválido
-    try:
-        c2 = Cliente("", "mal")
-    except Exception as e:
-        registrar_log(e)
-
-    # 3 servicio válido
-    s1 = ReservaSala("Sala", 50)
-
-    # 4 servicio inválido
-    try:
-        s2 = AlquilerEquipo("Equipo", -10)
-    except Exception as e:
-        registrar_log(e)
-
-    # 5 reserva válida
-    try:
-        r1 = Reserva(c1, s1, 2)
-        print("Costo:", r1.confirmar())
-    except Exception as e:
-        registrar_log(e)
-
-    # 6 reserva inválida
-    try:
-        r2 = Reserva(c1, s1, -1)
-        r2.confirmar()
-    except Exception as e:
-        registrar_log(e)
-
-    # 7 asesoría válida
-    try:
-        s3 = Asesoria("Consultoría", 100)
-        r3 = Reserva(c1, s3, 3)
-        print("Costo asesoría:", r3.confirmar())
-    except Exception as e:
-        registrar_log(e)
-
-    # 8 cliente inválido correo
-    try:
-        Cliente("Luis", "correo")
-    except Exception as e:
-        registrar_log(e)
-
-    # 9 cancelación
-    r1.cancelar()
-    print("Reserva cancelada")
-
-    # 10 otra válida
-    try:
-        r4 = Reserva(c1, s1, 1)
-        print("Costo:", r4.confirmar())
-    except Exception as e:
-        registrar_log(e)
+    # Preparamos una lista de tareas pendientes donde organizamos todas las pruebas que queremos que el software ejecute
+    operaciones = [
+        # reserva de sala primera prueba caso de exito donde todo deberia salir bien
+        lambda: Reserva(clientes_validados[0], servicios_fj["SALA"], 4).procesar_confirmacion(),
+        
+        # aqui forzamos una excepcion controlada enviando una duracion negativa
+        lambda: Reserva(clientes_validados[0], servicios_fj["PC"], -1).procesar_confirmacion(),
+        
+        # en esta prueba ejecutamos un caso de exito polimorfico
+        lambda: Reserva(clientes_validados[1], servicios_fj["PC"], 3).procesar_confirmacion(),
+        
+        # ponemos a prueba el modulo de restricciones al intentar reservar 15 horas
+        lambda: Reserva(clientes_validados[1], servicios_fj["SALA"], 15).procesar_confirmacion(),
+        
+        # el sistema identifica que el objeto es una asesoria y aplica un recargo del 10%
+        lambda: Reserva(clientes_validados[0], servicios_fj["DEV"], 2).procesar_confirmacion(),
+        
+        # error de cliente nombre invalido muy corto
+        lambda: Cliente("Ed", "0000"),
+        
+        # error de encadenamiento id con caracteres prohibidos
+        lambda: Cliente("Roberto", "ID_#$_ERROR"),
+        
+        # simulacion de calculo inconsistente division por cero
+        lambda: 10 / 0,
+        
+        # servicio no disponible o nulo envia un valor None en lugar de un servicio real
+        lambda: Reserva(clientes_validados[0], None, 5).procesar_confirmacion(),
+        
+        # demostracion de estabilidad tras error grave
+        lambda: Reserva(clientes_validados[1], servicios_fj["SALA"], 2).procesar_confirmacion()
+    ]
