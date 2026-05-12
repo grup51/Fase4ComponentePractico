@@ -1,12 +1,7 @@
-# Manejo de excepciones personalizadas
-class ErrorAplicacion(Exception):
+# Definición de errores propios para que el sistema no se bloquee
+class Falla_Sistema(Exception): # definimos errores propios para que el programa no se cierre de golpe
     pass
 
-class ErrorCliente(ErrorAplicacion):
-    pass
-
-class ErrorServicio(ErrorAplicacion):
-    pass
-
-class ErrorReserva(ErrorAplicacion):
+class ErrorDeNegocio(Falla_Sistema):
+    """Excepción para reglas de negocio incumplidas."""
     pass
