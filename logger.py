@@ -1,7 +1,8 @@
-# Función para registrar errores y eventos
-# en el archivo logs.txt
-from datetime import datetime
-
-def registrar_log(mensaje):
-    with open("logs.txt", "a", encoding="utf-8") as f:
-        f.write(f"{datetime.now()} - {mensaje}\n")
+import logging # Importamos la libreria para llevar el registro de lo que pasa en el sistema
+#  Registro de errores y eventos 
+# en el archivo errores_programa.txt
+logging.basicConfig(
+    filename='errores_programa.log', # Nombre del archivo donde se guardará todo
+    level=logging.INFO, # registra cada movimiento importante
+    format='%(asctime)s - %(levelname)s - %(message)s' # la estructura que debe llevar
+)
