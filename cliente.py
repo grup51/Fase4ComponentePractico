@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 class EntidadGeneral(ABC):
     @abstractmethod
     def obtener_identificacion(self):
