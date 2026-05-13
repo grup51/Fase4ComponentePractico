@@ -1,3 +1,4 @@
+import logging
 #definimos la clase reserva que funciona como el molde principal para generar cada registro de alquiler en nuestro sistema
 class Reserva:
     #creamos el metodo de inicio que es el encargado de recibir los datos basicos cuando nace una nueva reserva
