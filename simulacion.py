@@ -1,9 +1,10 @@
 import logging
 # Importamos las clases necesarias de los otros archivos modulares
+from excepciones import ErrorDeNegocio
 from cliente import Cliente
 from servicio import ReservaSalas, AlquilerEquipos, AsesoriaEspecializada
 from reserva import Reserva
-from excepciones import ErrorDeNegocio
+
 
 # simulacion de las 10 operaciones
 # aqui defino la funcion principal que sirve como el punto de entrada para ejecutar todo nuestro sistema de gestion
