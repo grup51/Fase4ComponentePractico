@@ -1,3 +1,9 @@
+import logging
+# Importamos las clases necesarias de los otros archivos modulares
+from cliente import Cliente
+from servicio import ReservaSalas, AlquilerEquipos, AsesoriaEspecializada
+from reserva import Reserva, ErrorDeNegocio
+
 # simulacion de las 10 operaciones
 # aqui defino la funcion principal que sirve como el punto de entrada para ejecutar todo nuestro sistema de gestion
 def iniciar_software():
@@ -55,3 +61,22 @@ def iniciar_software():
         # demostracion de estabilidad tras error grave
         lambda: Reserva(clientes_validados[1], servicios_fj["SALA"], 2).procesar_confirmacion()
     ]
+    # definimos un bucle de seguimiento operativo con enumerate garantizamos que cada paso del proceso este numerado
+    for i, operacion in enumerate(operaciones, 1):
+        # imprimimos un marcador de seguimiento
+        print(f"EJECUTANDO OPERACIÓN #{i}:")
+        # establecemos un entorno de ejecucion controlado
+        try:
+            # ejecutamos la operacion al llamar a operacion()
+            operacion()
+            # captura de errores que escapan al flujo interno
+        except Exception as e:
+            # registramos el fallo en nuestro archivo de auditoria
+            logging.error(f"Excepción externa en Op #{i}: {e}")
+            # informamos al usuario que el sistema aplico una capa de proteccion mostrando el nombre del error
+            print(f"   [!] El sistema protegió la ejecución contra un error de tipo: {type(e).__name__}\n")
+
+# generamos un mensaje de finalizacion de proceso
+    print("   SIMULACIÓN FINALIZADA CON ÉXITO                             ")
+    # mostramos un aviso al usuario para informarle que el sistema ya generó un archivo de registro
+    print("   Consulte el archivo 'errores_programa.log' para auditoría")
