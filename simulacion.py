@@ -1,6 +1,6 @@
 import logging
 # Importamos las clases necesarias de los otros archivos modulares
-from excepciones import ErrorDeNegocio
+from excepciones import ErrorDeNegocio, Falla_Sistema
 from cliente import Cliente
 from servicio import ReservaSalas, AlquilerEquipos, AsesoriaEspecializada
 from reserva import Reserva
