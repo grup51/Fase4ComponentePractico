@@ -23,6 +23,8 @@ class ReservaSalas(Servicio):
 # se define como cobrar
     def calcular_costo(self, horas, descuento=0):
         
+        if horas <= 0:
+            raise ErrorDeNegocio("Error: La duración debe ser mayor a 0 horas.")
         if horas > 12:# pongo un limite si el cliente se pasa de 12 horas el programa se detiene
             raise ErrorDeNegocio("Parámetro excedido: Máximo 12 horas por reserva.") # Lanzo el aviso de error explicando que no se pueden reservar tantas horas
         total = (self.precio_base * horas) - descuento # operación matematica multiplico el precio por el tiempo y le resto el descuento
@@ -31,8 +33,10 @@ class ReservaSalas(Servicio):
 class AlquilerEquipos(Servicio):
     def describir_servicio(self):# identifico el servicio como un equipo tecnologico y lo muestro en pantalla 
         return f"Equipo Tecnológico: {self.tipo}"
-
+    
     def calcular_costo(self, dias, tiene_seguro=True): # pedimos los días y preguntamos si el cliente tiene seguro
+        if dias <= 0:
+            raise ErrorDeNegocio("Error: Los días de alquiler deben ser mayores a 0.")
         
         cargo_seguro = 15000 if tiene_seguro else 0 # si tiene seguro le sumamos 15000 pesos si no le sumamos 0
         return (self.precio_base * dias) + cargo_seguro # devuelvo el cobro final sumando el precio por los dias mas lo que haya salido del seguro
@@ -42,5 +46,7 @@ class AsesoriaEspecializada(Servicio): # representa el conocimiento experto que 
         return f"Consultoría Experta en {self.tipo}" # le digo al cliente en que tema es experto el asesor que contrato
 
     def calcular_costo(self, sesiones): # Defino la forma de cobrar
+        if sesiones <= 0:
+            raise ErrorDeNegocio("Error: Los días de alquiler deben ser mayores a 0.")
         # multiplicamos el precio base por las sesiones y le sumamos un 10% extra
         return (self.precio_base * sesiones) * 1.10
