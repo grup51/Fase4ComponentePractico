@@ -72,6 +72,11 @@ def iniciar_software():
             # ejecutamos la operacion al llamar a operacion()
             operacion()
             # captura de errores que escapan al flujo interno
+        
+        except ErrorDeNegocio as e:
+            print(f"   [!] Error Controlado: {e}\n")
+        except ZeroDivisionError:
+            print(f"   [!] Error Controlado: Se detectó un cálculo matemático imposible (División por cero).\n")
         except Exception as e:
             # registramos el fallo en nuestro archivo de auditoria
             logging.error(f"Excepción externa en Op #{i}: {e}")
