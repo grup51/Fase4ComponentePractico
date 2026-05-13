@@ -1,3 +1,4 @@
+from excepciones import ErrorDeNegocio
 import logging
 from abc import ABC, abstractmethod
 # Esta clase es como una regla general nadie puede crear un servicio vacio
