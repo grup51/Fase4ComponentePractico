@@ -1,3 +1,4 @@
+from excepciones import ErrorDeNegocio
 from abc import ABC, abstractmethod
 class EntidadGeneral(ABC):
     @abstractmethod
